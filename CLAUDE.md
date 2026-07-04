@@ -1,0 +1,4 @@
+- 가장 먼저 MVP 제작을 목표로 함
+- backend에서 agent와 엔드포인트, 데이터베이스 구성을 먼저 완성하고 front 개발 예정
+- 사용 언어는 frontend는 flutter (dart), backend는 fastAPI (python)
+- 백엔드는 PostgreSQL (supabase) 사용 예정
