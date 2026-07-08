@@ -25,26 +25,26 @@
 
 ### 업데이트 내역
 - 2026.07.03
-requirements.txt	➡️	의존성 패키지 목록
-.env.example	➡️	환경변수 템플릿
-backend/app.py	➡️	FastAPI 앱 진입점, CORS, /chat 라우터 연결
-backend/routers/chat.py	➡️	POST /chat 엔드포인트
-backend/agents/main_agent.py	➡️	**Gemini Function Calling 루프**
-backend/tools/contract_scanner.py	➡️	계약서 이미지 → 위반 조항 추출 (Gemini Vision)
-backend/tools/labor_law_rag.py	➡️	노동법 ChromaDB 벡터 검색
-backend/tools/maps_tool.py	➡️	주변 기관 검색 + 지도 핀 생성
-backend/tools/dlp_tool.py	➡️	PII 마스킹 (regex + Cloud DLP 선택적)
-backend/tools/translation_tool.py	➡️	다국어 번역
-backend/tools/public_data_tool.py	➡️	수원시 공공기관 목록 조회
-backend/services/gemini_service.py	➡️	Gemini API 키 설정
-backend/services/vector_db_service.py	➡️	ChromaDB 초기화 + 자동 시딩
-backend/services/google_maps_service.py	➡️	Google Maps 클라이언트
-backend/services/storage_service.py	➡️	세션 히스토리 (메모리)
-backend/schemas/chat.py	➡️	ChatRequest / ChatResponse 모델
-backend/schemas/contract.py	➡️	ContractScanResult 모델
-backend/schemas/place.py	➡️	Place 모델
-backend/data/labor_law_chunks.json	➡️	노동법 지식베이스 12개 항목
-backend/data/public_centers.csv	➡️	수원시 지원기관 10곳
+  - requirements.txt	➡️	의존성 패키지 목록
+  - .env.example	➡️	환경변수 템플릿
+  - backend/app.py	➡️	FastAPI 앱 진입점, CORS, /chat 라우터 연결
+  - backend/routers/chat.py	➡️	POST /chat 엔드포인트
+  - backend/agents/main_agent.py	➡️	**Gemini Function Calling 루프**
+  - backend/tools/contract_scanner.py	➡️	계약서 이미지 → 위반 조항 추출 (Gemini Vision)
+  - backend/tools/labor_law_rag.py	➡️	노동법 ChromaDB 벡터 검색
+  - backend/tools/maps_tool.py	➡️	주변 기관 검색 + 지도 핀 생성
+  - backend/tools/dlp_tool.py	➡️	PII 마스킹 (regex + Cloud DLP 선택적)
+  - backend/tools/translation_tool.py	➡️	다국어 번역
+  - backend/tools/public_data_tool.py	➡️	수원시 공공기관 목록 조회
+  - backend/services/gemini_service.py	➡️	Gemini API 키 설정
+  - backend/services/vector_db_service.py	➡️	ChromaDB 초기화 + 자동 시딩
+  - backend/services/google_maps_service.py	➡️	Google Maps 클라이언트
+  - backend/services/storage_service.py	➡️	세션 히스토리 (메모리)
+  - backend/schemas/chat.py	➡️	ChatRequest / ChatResponse 모델
+  - backend/schemas/contract.py	➡️	ContractScanResult 모델
+  - backend/schemas/place.py	➡️	Place 모델
+  - backend/data/labor_law_chunks.json	➡️	노동법 지식베이스 12개 항목
+  - backend/data/public_centers.csv	➡️	수원시 지원기관 10곳
 
 ---
 ### 파이프라인
@@ -109,7 +109,7 @@ backend/data/public_centers.csv	➡️	수원시 지원기관 10곳
 
 
 ### 백엔드 구조
-'''
+``` 
 backend/
  ├─ main.py
  ├─ agents/
@@ -136,4 +136,4 @@ backend/
  └─ data/
      ├─ labor_law_chunks.json
      └─ public_centers.csv
-'''
+ ```
