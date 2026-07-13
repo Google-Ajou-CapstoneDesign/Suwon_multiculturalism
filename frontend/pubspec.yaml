@@ -1,5 +1,5 @@
 name: frontend
-description: "A new Flutter project."
+description: "Co-Local — 수원시 이주 근로자를 위한 노동권 AI 어시스턴트"
 publish_to: 'none'
 version: 0.1.0
 
@@ -9,6 +9,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  # API 통신
+  http: ^1.2.2
+
+  # 이미지 선택 (갤러리/카메라)
+  image_picker: ^1.1.2
+
+  # 세션 ID 생성
+  uuid: ^4.4.2
+
+  # 아이콘
+  cupertino_icons: ^1.0.8
 
 dev_dependencies:
   flutter_test:

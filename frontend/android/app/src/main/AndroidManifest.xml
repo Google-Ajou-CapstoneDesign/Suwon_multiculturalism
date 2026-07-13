@@ -1,4 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 갤러리 이미지 선택 (image_picker) -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <!-- API 32 이하 호환 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
+    <!-- 백엔드 API 통신 (http) -->
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="frontend"
         android:name="${applicationName}"
