@@ -32,7 +32,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final screens = [
-      ChatScreen(onResult: _onChatResult),
+      ChatScreen(
+        onResult: _onChatResult,
+        onGoToImageTab: () => setState(() => _selectedIndex = 1),
+      ),
       ImageScreen(warningCards: _warningCards),
       MapScreen(mapPins: _mapPins, nextActions: _nextActions),
       const NotificationScreen(),
