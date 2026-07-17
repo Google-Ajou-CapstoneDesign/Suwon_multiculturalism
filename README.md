@@ -66,10 +66,10 @@
 
   ↓
 - [단일 에이전트] `agents/main_agent.py`
-  - Gemini 2.0 Flash + Function Calling
+  - Gemini 3.1 Pro + Function Calling
   - 세션 히스토리 유지 (`services/storage_service.py`)
   - Function Calling 루프 (최대 8회):
-
+```
     ├─ search_labor_law(query) → `tools/labor_law_rag.py`
     │    └─ ChromaDB 벡터 검색 (`services/vector_db_service.py`)
     │         └─ text-embedding-004 임베딩 → labor_law_chunks.json 조회
@@ -79,7 +79,7 @@
     │
     └─ get_center_info(type) → `tools/public_data_tool.py`
          └─ 수원시 기관 전체 목록 반환
-
+```
   ↓
 - [응답 구성] `agents/main_agent.py`
   - DLP 마스킹 (응답 텍스트)
