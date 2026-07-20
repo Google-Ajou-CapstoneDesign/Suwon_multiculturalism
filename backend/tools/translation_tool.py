@@ -26,7 +26,7 @@ async def translate_text(text: str, target_language: str = "vi") -> str:
     gemini_service.configure()
     target = _LANG_NAMES.get(target_language, "Vietnamese")
 
-    model = genai.GenerativeModel("gemini-2.0-flash")
+    model = genai.GenerativeModel("gemini-3.1-pro")
     prompt = (
         f"Translate the following text to {target}. "
         "Output ONLY the translation, no explanations:\n\n"

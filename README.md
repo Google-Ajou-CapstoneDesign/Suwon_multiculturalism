@@ -24,6 +24,7 @@
   - backend/schemas/place.py	➡️	Place 모델
   - backend/data/labor_law_chunks.json	➡️	노동법 지식베이스 12개 항목
   - backend/data/public_centers.csv	➡️	수원시 지원기관 10곳
+
 - 2026.07.14
   - frontend/pubspec.yaml ➡️ 패키지 추가 (http, image_picker, uuid)
   - frontend/lib/main.dart ➡️ CoLocalApp 진입점, HomeScreen 연결
@@ -39,11 +40,25 @@
   - frontend/lib/screens/notification_screen.dart ➡️ 알림 화면 (Stub)
   - frontend/lib/screens/profile_screen.dart ➡️ 프로필 화면 (Stub)
   - frontend/android/app/src/main/AndroidManifest.xml ➡️ 이미지·인터넷 권한 추가
+
 - 2026.07.17
   - frontend/lib/screens/chat_screen.dart ➡️ DefaultTabController 크래시 → onGoToImageTab 콜백으로 수정
   - frontend/lib/screens/home_screen.dart ➡️ onGoToImageTab 콜백 전달 (이미지 탭 전환)
   - frontend/lib/widgets/chat_bubble.dart ➡️ NetworkImage → Image.file() 로컬 파일 렌더링 수정
   - backend/data/labor_law_chunks.json ➡️ 최저임금 2024(9,860원) → 2025(10,030원) 업데이트
+
+- 2026.07.20
+  - README.md ➡️ 파이프라인 섹션 실제 단일 에이전트 구조로 전면 재작성, 프론트엔드 구조 섹션 추가
+  - backend/agents/main_agent.py ➡️ 모델명 gemini-2.0-flash → gemini-3.1-pro
+  - backend/tools/contract_scanner.py ➡️ 모델명 gemini-2.0-flash → gemini-3.1-pro
+  - backend/tools/translation_tool.py ➡️ 모델명 gemini-2.0-flash → gemini-3.1-pro
+  - backend/services/gemini_service.py ➡️ get_model() 기본값 gemini-2.0-flash → gemini-3.1-pro
+  - frontend/lib/screens/community_screen.dart ➡️ 신규 생성 — 실명 인증 게이트 + 국적별 커뮤니티 뷰 (Stub)
+  - frontend/lib/screens/profile_screen.dart ➡️ 실명 인증 UI 추가 (국적·비자유형·비자번호 입력 → onVerified 콜백)
+  - frontend/lib/screens/home_screen.dart ➡️ 문서 탭 → 커뮤니티 탭 교체, _isVerified 상태 관리, _warningCards 제거
+  - frontend/lib/screens/chat_screen.dart ➡️ onGoToImageTab 제거, onResult 시그니처 단순화 (warningCards 제거)
+  - frontend/lib/widgets/chat_bubble.dart ➡️ onActionTap · _actionCard 제거 2026.07.20
+  
 
 ---
 ### 파이프라인

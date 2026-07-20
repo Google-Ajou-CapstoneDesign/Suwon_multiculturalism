@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import '../models/chat_message.dart';
 
 class ChatBubble extends StatelessWidget {
-  const ChatBubble({super.key, required this.message, this.onActionTap});
+  const ChatBubble({super.key, required this.message});
 
   final ChatMessage message;
-  final VoidCallback? onActionTap;
 
   static const _userColor = Color(0xFF2563EB);
   static const _botColor = Color(0xFFF3F4F6);
@@ -67,9 +66,6 @@ class ChatBubble extends StatelessWidget {
                   textColor: _botTextColor,
                   isUser: false,
                 ),
-              // 경고 카드가 있을 때 "이미지 탭으로 이동" 액션 카드
-              if (message.warningCards.isNotEmpty)
-                _actionCard(),
             ],
           ),
         ),
@@ -131,35 +127,6 @@ class ChatBubble extends StatelessWidget {
     );
   }
 
-  Widget _actionCard() {
-    return GestureDetector(
-      onTap: onActionTap,
-      child: Container(
-        margin: const EdgeInsets.only(top: 6),
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: const Color(0xFF2563EB), width: 1.2),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            Icon(Icons.image_search, color: Color(0xFF2563EB), size: 20),
-            SizedBox(width: 8),
-            Text(
-              '분석 결과 보기 →',
-              style: TextStyle(
-                color: Color(0xFF2563EB),
-                fontWeight: FontWeight.w600,
-                fontSize: 14,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }
 
 // ── 날짜 구분선 ──────────────────────────────────────────

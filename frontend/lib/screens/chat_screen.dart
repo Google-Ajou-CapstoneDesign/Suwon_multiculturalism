@@ -8,13 +8,10 @@ import '../services/chat_service.dart';
 import '../widgets/chat_bubble.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key, this.onResult, this.onGoToImageTab});
+  const ChatScreen({super.key, this.onResult});
 
-  /// 백엔드 응답에서 받은 경고 카드·지도 핀·다음 행동을 부모(HomeScreen)에 전달
-  final void Function(List<WarningCard> cards, List<MapPin> pins, List<String> actions)? onResult;
-
-  /// 분석 결과 카드를 눌렀을 때 이미지 탭으로 이동 요청
-  final VoidCallback? onGoToImageTab;
+  /// 백엔드 응답에서 받은 지도 핀·다음 행동을 부모(HomeScreen)에 전달
+  final void Function(List<MapPin> pins, List<String> actions)? onResult;
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -91,9 +88,9 @@ class _ChatScreenState extends State<ChatScreen> {
         _isLoading = false;
       });
 
-      // 부모에게 분석 결과 전달 (이미지 탭·지도 탭 업데이트)
-      if (res.hasWarnings || res.hasPins) {
-        widget.onResult?.call(res.warningCards, res.mapPins, res.nextActions);
+      // 지도 탭 업데이트
+      if (res.hasPins) {
+        widget.onResult?.call(res.mapPins, res.nextActions);
       }
     } catch (e) {
       if (!mounted) return;
@@ -180,10 +177,7 @@ class _ChatScreenState extends State<ChatScreen> {
         return Column(
           children: [
             if (showDate) DateSeparator(date: msg.timestamp),
-            ChatBubble(
-              message: msg,
-              onActionTap: widget.onGoToImageTab,
-            ),
+            ChatBubble(message: msg),
           ],
         );
       },

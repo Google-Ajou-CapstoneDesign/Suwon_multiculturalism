@@ -51,7 +51,7 @@ async def scan_contract_image(image_base64: str, language: str = "ko") -> dict:
     lang_name = _LANG_MAP.get(language, "한국어")
     prompt = _SCAN_PROMPT.replace("{{LANGUAGE}}", lang_name)
 
-    model = genai.GenerativeModel("gemini-2.0-flash")
+    model = genai.GenerativeModel("gemini-3.1-pro")
 
     import asyncio
     response = await asyncio.to_thread(model.generate_content, [image, prompt])

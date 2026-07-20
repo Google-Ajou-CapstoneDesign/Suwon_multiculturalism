@@ -9,5 +9,5 @@ def configure() -> None:
     genai.configure(api_key=api_key)
 
 
-def get_model(model_name: str = "gemini-2.0-flash", **kwargs) -> genai.GenerativeModel:
+def get_model(model_name: str = "gemini-3.1-pro", **kwargs) -> genai.GenerativeModel:
     return genai.GenerativeModel(model_name=model_name, **kwargs)

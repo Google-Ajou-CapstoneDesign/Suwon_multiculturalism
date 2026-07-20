@@ -94,7 +94,7 @@ async def run_agent(request: ChatRequest) -> ChatResponse:
     system = _SYSTEM_PROMPT.replace("{LANGUAGE}", lang)
 
     model = genai.GenerativeModel(
-        model_name="gemini-2.0-flash",
+        model_name="gemini-3.1-pro",
         tools=[search_labor_law, find_nearby_centers, get_center_info],
         system_instruction=system,
     )
