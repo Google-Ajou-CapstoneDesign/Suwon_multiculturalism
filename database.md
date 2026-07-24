@@ -4,101 +4,104 @@
 classDiagram
     direction LR
 
-    class users {
-        +int id (PK)
-        +text auth_provider
-        +text auth_provider_id (Unique)
-        +text email
-        +text nickname
-        +text preferred_language
-        +text nationality
-        +text visa_type
-        +text residence
+    class knowledge_chunks {
+        +text id (PK)
+        +text category
+        +text topic
+        +text law (Nullable)
+        +text visa_type (Nullable)
+        +text content
+        +text[] keywords (Nullable)
+        +vector(768) embedding (Nullable)
         +timestamptz created_at
+        +timestamptz updated_at
+    }
+
+    class public_centers {
+        +int id (PK)
+        +text name
+        +text type
+        +text address
+        +double lat
+        +double lng
+        +text phone (Nullable)
+        +text hours (Nullable)
+        +text[] supported_languages (Nullable)
+        +text reservation_url (Nullable)
+        +timestamptz created_at
+        +timestamptz updated_at
+    }
+
+    class users {
+        +uuid id (PK)
+        +text nationality (Nullable)
+        +text visa_type (Nullable)
+        +text visa_number (Nullable)
+        +boolean is_verified
+        +text preferred_lang
+        +timestamptz created_at
+        +timestamptz updated_at
     }
 
     class chat_sessions {
-        +int id (PK)
-        +int user_id (FK)
-        +text title
-        +text session_type
+        +text session_id (PK)
+        +uuid user_id (FK, Nullable)
+        +jsonb history
+        +text language
         +timestamptz created_at
         +timestamptz updated_at
     }
 
-    class chat_messages {
-        +int id (PK)
-        +int session_id (FK)
-        +text role
-        +text message_type
-        +text content
-        +int file_id (FK, Nullable)
-        +jsonb tool_result
-        +timestamptz created_at
-    }
-
-    class uploaded_files {
-        +int id (PK)
-        +int user_id (FK)
-        +text file_name
-        +text file_url
-        +text file_type
-        +timestamptz created_at
-    }
-
-    class contract_analyses {
-        +int id (PK)
-        +int user_id (FK)
-        +int file_id (FK)
-        +text model_name
-        +jsonb analysis_result
-        +text risk_level
-        +text summary
-        +timestamptz created_at
-    }
-
-    class institutions {
-        +int id (PK)
+    class safe_workplaces {
+        +uuid id (PK)
         +text name
-        +text category
+        +text industry
         +text address
-        +double latitude
-        +double longitude
-        +text phone
-        +text opening_hours
-        +jsonb supported_languages
-        +jsonb services
-        +text reservation_url
+        +double lat (Nullable)
+        +double lng (Nullable)
+        +text phone (Nullable)
+        +text[] allowed_visa_types (Nullable)
+        +boolean is_certified
+        +timestamptz certification_date (Nullable)
+        +timestamptz recertification_due (Nullable)
+        +boolean public_data_verified
+        +boolean wage_direct_payment (Nullable)
+        +int review_count
+        +numeric avg_rating (Nullable)
         +timestamptz created_at
         +timestamptz updated_at
     }
 
-    class knowledge_chunks {
-        +int id (PK)
-        +text category
+    class workplace_reviews {
+        +uuid id (PK)
+        +uuid workplace_id (FK)
+        +text reviewer_nationality
+        +text reviewer_visa_type
+        +smallint rating
+        +text content (Nullable)
+        +boolean is_verified_worker
+        +timestamptz created_at
+    }
+
+    class community_posts {
+        +uuid id (PK)
+        +uuid user_id (FK, Nullable)
+        +text nationality
         +text title
-        +text source
         +text content
-        +vector embedding
+        +int reply_count
         +timestamptz created_at
         +timestamptz updated_at
     }
 
     %% 사용자 관계
     users "1" -- "0..*" chat_sessions : owns
-    users "1" -- "0..*" uploaded_files : uploads
-    users "1" -- "0..*" contract_analyses : requests
+    users "1" -- "0..*" community_posts : writes
 
-    %% 채팅 관계
-    chat_sessions "1" -- "0..*" chat_messages : contains
+    %% 안심 사업장 관계
+    safe_workplaces "1" -- "0..*" workplace_reviews : has
 
-    %% 파일 첨부 관계
-    uploaded_files "0..1" -- "0..*" chat_messages : attached_to
-
-    %% 계약서 분석 관계
-    uploaded_files "1" -- "0..*" contract_analyses : analyzed_by
-
-    %% 독립 테이블
-    institutions "0..*" .. "0..*" chat_messages : used_in_map_result
-    knowledge_chunks "0..*" .. "0..*" chat_messages : used_for_rag
+    %% 에이전트 논리적 참조
+    knowledge_chunks "0..*" .. "0..*" chat_sessions : used_for_rag
+    public_centers "0..*" .. "0..*" chat_sessions : used_in_map_result
 ```

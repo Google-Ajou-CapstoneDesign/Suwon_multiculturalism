@@ -53,12 +53,20 @@
   - backend/tools/contract_scanner.py ➡️ 모델명 gemini-2.0-flash → gemini-3.1-pro
   - backend/tools/translation_tool.py ➡️ 모델명 gemini-2.0-flash → gemini-3.1-pro
   - backend/services/gemini_service.py ➡️ get_model() 기본값 gemini-2.0-flash → gemini-3.1-pro
+  - backend/Dockerfile ➡️ 신규 생성 — Hugging Face Spaces Docker SDK 배포용
+  - backend/README.md ➡️ 신규 생성 — HF Spaces 메타데이터 + 엔드포인트·환경변수 문서
+  - backend/requirements.txt ➡️ supabase>=2.4.0 추가
   - frontend/lib/screens/community_screen.dart ➡️ 신규 생성 — 실명 인증 게이트 + 국적별 커뮤니티 뷰 (Stub)
-  - frontend/lib/screens/profile_screen.dart ➡️ 실명 인증 UI 추가 (국적·비자유형·비자번호 입력 → onVerified 콜백)
+  - frontend/lib/screens/profile_screen.dart ➡️ 실명 인증 UI 구현 (국적·비자유형·비자번호 입력 → onVerified 콜백)
   - frontend/lib/screens/home_screen.dart ➡️ 문서 탭 → 커뮤니티 탭 교체, _isVerified 상태 관리, _warningCards 제거
   - frontend/lib/screens/chat_screen.dart ➡️ onGoToImageTab 제거, onResult 시그니처 단순화 (warningCards 제거)
-  - frontend/lib/widgets/chat_bubble.dart ➡️ onActionTap · _actionCard 제거 2026.07.20
-  
+  - frontend/lib/widgets/chat_bubble.dart ➡️ onActionTap · _actionCard 제거
+  - database/schema.sql ➡️ Supabase 전면 마이그레이션 스키마 설계 (pgvector RAG, RLS, RPC 함수, 시드 데이터 포함)
+
+- 2026.07.23
+  - database.md ➡️ 데이터베이스 설계도 신규 스키마 반영 (Mermaid 클래스 다이어그램 전면 재작성)
+  - database/database.md ➡️ 신규 생성 — 테이블 상세 명세, RPC 함수, 인덱스, RLS, Supabase 적용 방법 문서화
+
 
 ---
 ### 파이프라인
@@ -112,7 +120,14 @@
 
 ### 프로젝트 구조
 ```
+database/
+ ├─ schema.sql          ← Supabase 전체 스키마 (pgvector, RLS, RPC, 시드 데이터)
+ └─ database.md         ← 테이블 상세 명세 문서
+
 backend/
+ ├─ Dockerfile          ← Hugging Face Spaces Docker SDK 배포용
+ ├─ README.md           ← HF Spaces 메타데이터 + API 문서
+ ├─ requirements.txt
  ├─ app.py
  ├─ routers/
  │   └─ chat.py
@@ -152,10 +167,11 @@ frontend/
      ├─ widgets/
      │   └─ chat_bubble.dart
      └─ screens/
-         ├─ home_screen.dart
-         ├─ chat_screen.dart
-         ├─ image_screen.dart
-         ├─ map_screen.dart
-         ├─ notification_screen.dart
-         └─ profile_screen.dart
+         ├─ home_screen.dart       ← 하단 탭 5개, _isVerified 상태 관리
+         ├─ chat_screen.dart       ← 채팅 UI
+         ├─ image_screen.dart      ← 계약서 분석 결과 카드
+         ├─ map_screen.dart        ← 주변 기관 목록 + 다음 행동 지침
+         ├─ community_screen.dart  ← 실명 인증 게이트 + 국적별 커뮤니티 (Stub)
+         ├─ notification_screen.dart ← 알림 (Stub)
+         └─ profile_screen.dart    ← 실명 인증 UI (국적·비자유형·비자번호)
 ```
